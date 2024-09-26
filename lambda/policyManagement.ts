@@ -41,11 +41,11 @@ export const handler = async (event: any) => {
         policyId,
         filePath,
         timestamp: new Date().toISOString(),
-        complianceStatus: 'Not Started',  // Adding default compliance status
-        auditStatus: 'Pending',  // Adding default audit status
-        lastAuditDate: null,  // Adding default audit date as null
-        nonComplianceReports: 0,  // Adding default non-compliance report count as 0
-        evidenceAvailable: false,  // Adding default evidence available as false
+        complianceStatus: 'Not Started',  
+        auditStatus: 'Pending',  
+        lastAuditDate: null, 
+        nonComplianceReports: 0,
+        evidenceAvailable: false, 
       },
     };
 
