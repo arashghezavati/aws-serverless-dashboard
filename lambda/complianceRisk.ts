@@ -8,8 +8,8 @@ export const handler = async (event: any) => {
   try {
     // Fetch the compliance data for all policies
     const params = {
-      TableName: process.env.TABLE_NAME!, // Ensure the table name is correct
-      Limit: 10, // Limit the number of records returned, adjust as needed
+      TableName: process.env.TABLE_NAME!, 
+      Limit: 10,
     };
 
     const result = await dynamoDB.scan(params).promise();
