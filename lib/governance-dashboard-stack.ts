@@ -19,7 +19,7 @@ export class GovernanceDashboardStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       cors: [
         {
-          allowedOrigins: ['http://localhost:3000'], // Update with your actual origin
+          allowedOrigins: ['http://localhost:3000'],
           allowedMethods: [s3.HttpMethods.GET, s3.HttpMethods.PUT, s3.HttpMethods.POST],
           allowedHeaders: ['*'],
           maxAge: 3000,
@@ -31,7 +31,7 @@ export class GovernanceDashboardStack extends cdk.Stack {
     const complianceTable = new dynamodb.Table(this, 'ComplianceTable', {
       partitionKey: { name: 'policyId', type: dynamodb.AttributeType.STRING },
       removalPolicy: cdk.RemovalPolicy.DESTROY,
-      // stream: dynamodb.StreamViewType.NEW_AND_OLD_IMAGES,
+     
     });
 
     // SNS Topic
