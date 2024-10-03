@@ -5,8 +5,6 @@ import { DynamoDB } from 'aws-sdk';
 
 const dynamoDB = new DynamoDB.DocumentClient();
 export const handler = async (event: any) => {
-  console.log("Lambda started");
-  console.log("Event received", JSON.stringify(event, null, 2)); 
   
   try {
     const params = {
@@ -14,11 +12,9 @@ export const handler = async (event: any) => {
       Limit: 10,
     };
 
-    console.log("Fetching data from DynamoDB with params:", JSON.stringify(params));
 
     const result = await dynamoDB.scan(params).promise();
 
-    console.log("DynamoDB result:", JSON.stringify(result));
 
     if (result.Items) {
       const complianceData = result.Items.map(item => ({
@@ -32,17 +28,16 @@ export const handler = async (event: any) => {
         evidenceAvailable: item.evidenceAvailable ? 'Yes' : 'No',
       }));
 
-      console.log("Compliance data processed", JSON.stringify(complianceData));
 
       return {
         statusCode: 200,
         body: JSON.stringify(complianceData),
       };
     } else {
-      console.log("No compliance records found");
+      console.log("No records found");
       return {
         statusCode: 404,
-        body: JSON.stringify({ message: 'No compliance records found' }),
+        body: JSON.stringify({ message: 'No records found' }),
       };
     }
   } catch (error) {

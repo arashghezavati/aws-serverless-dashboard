@@ -59,7 +59,7 @@ export class GovernanceDashboardStack extends cdk.Stack {
     //sqs notification
     complianceNotificationTopic.addSubscription(new snsSubscriptions.SqsSubscription(complianceQueue));
 
-    // Policy Management Lambda
+    // Policy Management 
     const policyManagementLambda = new lambda.Function(this, 'PolicyManagementLambda', {
       runtime: lambda.Runtime.NODEJS_16_X,
       handler: 'policyManagement.handler',
@@ -71,7 +71,7 @@ export class GovernanceDashboardStack extends cdk.Stack {
       },
     });
 
-    // Compliance Risk Lambda
+    // Compliance Risk 
     const complianceRiskLambda = new lambda.Function(this, 'ComplianceRiskLambda', {
       runtime: lambda.Runtime.NODEJS_16_X,
       handler: 'complianceRisk.handler',
@@ -82,7 +82,7 @@ export class GovernanceDashboardStack extends cdk.Stack {
       },
     });
 
-    // Compliance Processor Lambda
+    // Compliance Processor 
     const complianceProcessorLambda = new lambda.Function(this, 'ComplianceProcessorLambda', {
       runtime: lambda.Runtime.NODEJS_16_X,
       handler: 'complianceProcessor.handler',
@@ -97,8 +97,8 @@ export class GovernanceDashboardStack extends cdk.Stack {
     complianceTable.grantReadWriteData(policyManagementLambda);
     complianceTable.grantReadWriteData(complianceRiskLambda);
     complianceTable.grantReadWriteData(complianceProcessorLambda);
-    complianceQueue.grantSendMessages(policyManagementLambda); // Grant permission to send messages to SQS
-    complianceQueue.grantConsumeMessages(complianceProcessorLambda); // Grant permission to read messages from SQS
+    complianceQueue.grantSendMessages(policyManagementLambda); 
+    complianceQueue.grantConsumeMessages(complianceProcessorLambda);
 
     // Event Source
     complianceProcessorLambda.addEventSource(new sqsEvents.SqsEventSource(complianceQueue));
