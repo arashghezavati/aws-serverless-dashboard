@@ -9,14 +9,14 @@ export const handler = async (event: any) => {
     const messageBody = JSON.parse(record.body);
     console.log('Message received:', messageBody);
 
-    // Process the message (e.g., log it, store it in DynamoDB, etc.)
+    //Updataing
     const params = {
       TableName: process.env.TABLE_NAME!,
       Item: {
         policyId: messageBody.policyId,
         filePath: messageBody.filePath,
         timestamp: new Date().toISOString(),
-        complianceStatus: 'Processed', // Indicate processing
+        complianceStatus: 'Processed',
       },
     };
 
@@ -25,7 +25,6 @@ export const handler = async (event: any) => {
       console.log(`Successfully processed message for policyId: ${messageBody.policyId}`);
     } catch (error) {
       console.error("Error processing message:", error);
-      // Handle error (e.g., send to a dead-letter queue or log the failure)
     }
   }
 
